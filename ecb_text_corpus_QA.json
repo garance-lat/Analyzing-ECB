@@ -1,0 +1,35 @@
+{
+  "rows_total": 3111,
+  "time_range": {
+    "min": "1997-02-07 00:00:00",
+    "max": "2025-09-30 00:00:00"
+  },
+  "by_channel": {
+    "speech": 2808,
+    "press_conference": 303
+  },
+  "missing_title_%": 0.0,
+  "missing_speaker_%": 9.74,
+  "median_chars": 18617,
+  "median_tokens_ws": 2929,
+  "columns_picked": {
+    "A": {
+      "title_col": "title",
+      "text_col": "contents",
+      "speaker_col": "speakers",
+      "url_col": "",
+      "date_col": "date",
+      "channel": "speech",
+      "source": "all_ECB_speeches.csv"
+    },
+    "B": {
+      "title_col": "title",
+      "text_col": "text",
+      "speaker_col": "",
+      "url_col": "link",
+      "date_col": "date",
+      "channel": "press_conference",
+      "source": "ecb_conferences_1998_2025.csv"
+    }
+  }
+}
