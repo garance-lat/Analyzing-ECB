@@ -73,11 +73,10 @@ def prepare_block(df: pd.DataFrame, source_type: str) -> pd.DataFrame:
     # parse dates (tolérant)
     out["date"] = pd.to_datetime(out["date"], errors="coerce", dayfirst=True, infer_datetime_format=True)
     out["title"] = out["title"].fillna("")
-    out["link"]  = out["link"].fillna("")
     out["text"]  = out["text"].fillna("").map(clean_text_basic)
     out["source_type"] = source_type
     out = out.dropna(subset=["date"])
-    return out[["date","title","link","text","source_type"]]
+    return out[["date","title","text","source_type"]]
 
 def main():
     ap = argparse.ArgumentParser(description="Merge ECB speeches and press conferences into one CSV")
