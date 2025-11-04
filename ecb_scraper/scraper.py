@@ -71,7 +71,7 @@ def get_conference_text(link: str) -> str:
 
     # 🧠 Si la page n'a pas de <main>, on ignore (probablement une page vidéo/PDF)
     if main_tag is None:
-        print(f"⚠️ Aucun tag <main> trouvé pour {link} — page ignorée.")
+        print(f"IGNORE {link} — PDF FORMAT.")
         return ""
 
     relevant_elements: List[str] = []
