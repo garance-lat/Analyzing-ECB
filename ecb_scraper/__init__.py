@@ -1,7 +1,13 @@
 #Copyright (c) 2024 Thomas Kientz
-from .scraper import load_ecb_conferences
 
+from pathlib import Path
 import pandas as pd
-df = pd.read_csv("C:\Users\Garance Latieule\analyzing ECB\Analyzing-ECB\data_ecb\all_ECB_speeches.csv", sep="|", encoding="utf-8-sig")  # adapte sep/encoding si besoin
-# Vérifie les colonnes si doute :
-print(df.columns)
+
+# Racine du projet = dossier parent de ecb_scraper/
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+DATA_DIR = PROJECT_ROOT / "data_ecb"
+
+def load_all_speeches_csv():
+    path = DATA_DIR / "all_ECB_speeches.csv"
+    return pd.read_csv(path, sep="|", encoding="utf-8-sig")
+
