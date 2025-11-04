@@ -34,7 +34,11 @@ def _write_double_slash_csv(
     def sanitize(val) -> str:
         if pd.isna(val):
             return ""
-        s = str(val)
+        # format dates cleanly
+        if isinstance(val, (pd.Timestamp, )):
+            s = val.strftime("%Y-%m-%d")
+        else:
+            s = str(val)
         # Normalize newlines/whitespace to keep one line per record
         s = s.replace("\r\n", " ").replace("\r", " ").replace("\n", " ")
         # Escape the separator if it appears in text
