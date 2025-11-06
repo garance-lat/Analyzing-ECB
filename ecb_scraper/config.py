@@ -1,5 +1,3 @@
-#Copyright (c) 2024 Thomas Kientz
-"""Configuration file for the ECB Scraper."""
 
 ROOT_URL = "https://www.ecb.europa.eu"
 BASE_INDEX_URL_1 = ROOT_URL + "/press/pressconf/{year}/html/index_include.en.html"
@@ -16,4 +14,3 @@ def index_url_year(year):
         return BASE_INDEX_URL_2.format(year=year)
     else:
         return BASE_INDEX_URL_1.format(year=year)
-

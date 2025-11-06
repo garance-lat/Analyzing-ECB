@@ -1,4 +1,4 @@
-##Copyright (c) 2024 Thomas Kientz
+
 """Main scraper and parser for ECB press conference transcripts."""
 
 import pandas as pd

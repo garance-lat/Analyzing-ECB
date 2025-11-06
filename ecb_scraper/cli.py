@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Thomas Kient
+
 """Command line interface for the ECB Scraper."""
 
 import argparse
@@ -23,7 +23,6 @@ def _write_double_slash_csv(
       - Escape occurrences of `//` inside values to `\/\//` so they don't break parsing.
       - Encode as UTF-8 with BOM for better Excel compatibility.
     """
-    # Validate columns (case-insensitive)
     lower_map = {c.lower(): c for c in df.columns}
     missing = [c for c in order if c.lower() not in lower_map]
     if missing:
@@ -34,21 +33,17 @@ def _write_double_slash_csv(
     def sanitize(val) -> str:
         if pd.isna(val):
             return ""
-        # format dates cleanly
         if isinstance(val, (pd.Timestamp, )):
             s = val.strftime("%Y-%m-%d")
         else:
             s = str(val)
-        # Normalize newlines/whitespace to keep one line per record
         s = s.replace("\r\n", " ").replace("\r", " ").replace("\n", " ")
-        # Escape the separator if it appears in text
         s = s.replace("//", r"\/\//")
         return s
 
     header = "//".join(order)
     os.makedirs(os.path.dirname(output_file) or ".", exist_ok=True)
 
-    # Write manually to preserve the exact `//` format
     with open(output_file, "w", encoding="utf-8-sig", newline="") as f:
         f.write(header + "\n")
         for _, row in df[cols].iterrows():
@@ -69,8 +64,6 @@ def save_data(df: pd.DataFrame, output_file: str) -> None:
     format_ = output_file.split(".")[-1].lower()
 
     if format_ == "csv":
-        # --- MINIMAL CHANGE REQUESTED ---
-        # Write a `//`-separated file with columns: date//title//link//text
         _write_double_slash_csv(df, output_file)
     elif format_ == "json":
         df.to_json(output_file, orient="records", force_ascii=False)
